@@ -31,7 +31,9 @@ if (cardsInPlay[0] === cardsInPlay[1]) {
 }
 };
 
-function flipcard(cardId) {
+function flipcard() {
+let cardId = this.getAttribute('data-id');
+this.setAttribute('src', cards[cardId].cardImage);
 console.log("User flipped " + cards[cardId].rank);
 cardsInPlay.push(cards[cardId].rank);
 console.log(cards[cardId].cardImage);
@@ -42,5 +44,14 @@ if (cardsInPlay.length === 2) {
 }
 };
 
-flipcard(0);
-flipcard(2);
+function createBoard() {
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.createElement('img');
+		cardElement.setAttribute('src', 'images/back.png');
+		cardElement.setAttribute('data-id', i);
+		cardElement.addEventListener('click', flipcard);
+		document.getElementById("game-board").appendChild(cardElement);
+	}
+};
+
+createBoard();
